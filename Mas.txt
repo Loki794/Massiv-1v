@@ -1,0 +1,53 @@
+#define _CRT_SECURE_NO_WARNINGS 
+#include <stdio.h> 
+#include <locale.h> 
+#include <windows.h>
+#define MAX_SIZE 50
+void main(void)
+{
+	int mas[MAX_SIZE];
+	int size;
+	int isNotOk = 1;
+	setlocale(LC_ALL, "rus");
+
+	printf("Введите размер массива больше 4: ");
+	while (scanf("%d", &size) < 0  || size > MAX_SIZE || !size || size < 5)
+	{
+		while (getchar() != '\n');
+		puts("Ошибка - повторите ввод (введите целое число больше 4, например: 7, 13, 5)");
+	-	//Sleep(600);
+	-	//system("cls");
+	}
+
+	puts("Введите элементы массива: ");
+	for (int i = 0; i < size; i++)
+	{
+		printf("mas[%2d]=", i);
+		while (scanf("%d", &mas[i]) <= 0)
+		{
+			while (getchar() != '\n');
+			puts("Ошибка - повторите ввод");
+		}
+	}
+
+	int max = mas[size - 1];
+	int NumberOfMaxElement = 0;
+	for (int i = size - 2; i >= 0; i--) // i >= min
+	{
+		if (mas[i] > max)
+		{
+			max = mas[i];
+			NumberOfMaxElement = i;
+		}
+	}
+
+	mas[4] = mas[NumberOfMaxElement];
+	printf("полученный массив: ");
+	for (int i = 0; i < size; i++)
+	{
+		printf("%d ", mas[i]);
+	}
+	printf("\n");
+
+	system("pause");
+}
